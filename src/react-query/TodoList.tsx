@@ -7,7 +7,6 @@ interface Todo {
   userId: number;
   completed: boolean;
 }
-//lol
 
 const TodoList = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
