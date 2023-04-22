@@ -1,18 +1,21 @@
-import { useReducer, useState } from "react";
-import tasksReducer from "./reducers/tasksReducer";
+import { useState } from 'react';
+
+interface Task {
+  id: number;
+  title: string;
+}
 
 const TaskList = () => {
-  // const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
-  const [tasks, dispatch] = useReducer(tasksReducer, []);
   return (
     <>
       <button
         onClick={() =>
-          dispatch({
-            type: "ADD",
-            task: { id: Date.now(), title: "Task" + Date.now() },
-          })
+          setTasks([
+            { id: Date.now(), title: 'Task ' + Date.now() },
+            ...tasks,
+          ])
         }
         className="btn btn-primary my-3"
       >
@@ -27,7 +30,9 @@ const TaskList = () => {
             <span className="flex-grow-1">{task.title}</span>
             <button
               className="btn btn-outline-danger"
-              onClick={() => dispatch({ type: "DELETE", taskId: task.id })}
+              onClick={() =>
+                setTasks(tasks.filter((t) => t.id !== task.id))
+              }
             >
               Delete
             </button>
