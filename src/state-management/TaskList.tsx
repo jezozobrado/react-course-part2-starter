@@ -1,10 +1,9 @@
-import { useReducer, useState } from "react";
-import tasksReducer from "./reducers/tasksReducer";
+import { useContext, useReducer, useState } from "react";
+screenY;
+import TasksContext from "./context/tasksContext";
 
 const TaskList = () => {
-  // const [tasks, setTasks] = useState<Task[]>([]);
-
-  const [tasks, dispatch] = useReducer(tasksReducer, []);
+  const { tasks, dispatch } = useContext(TasksContext);
   return (
     <>
       <button
